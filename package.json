@@ -9,7 +9,10 @@
     "check": "biome check --write ."
   },
   "dependencies": {
+    "dotenv": "17.1.0",
+    "drizzle-orm": "0.44.2",
     "next": "15.3.5",
+    "pg": "8.16.3",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -17,9 +20,12 @@
     "@biomejs/biome": "2.1.1",
     "@tailwindcss/postcss": "4.1.11",
     "@types/node": "24.0.12",
+    "@types/pg": "8.15.4",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
+    "drizzle-kit": "0.31.4",
     "tailwindcss": "4.1.11",
+    "tsx": "4.20.3",
     "typescript": "5.8.3"
   }
 }
