@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { Create } from '@/app/(web)/make/_components/create';
 import { auth } from '@/lib/auth';
 
 export default async function MakePage() {
@@ -9,5 +10,9 @@ export default async function MakePage() {
     redirect('/');
   }
 
-  return <h1>Make</h1>;
+  return (
+    <section className="mx-6 mt-6">
+      <Create />
+    </section>
+  );
 }

@@ -24,6 +24,27 @@
   }
 }
 
+.test {
+  @apply relative;
+}
+
+.test:before,
+.test:after {
+  @apply absolute -z-10 size-full border border-border bg-white content-[''];
+}
+
+.test:before {
+  left: -5px;
+  top: 2px;
+  transform: rotate(-1.5deg);
+}
+
+.test:after {
+  right: -3px;
+  top: 0px;
+  transform: rotate(2.4deg);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -33,6 +54,26 @@
   }
 
   input {
-    @apply rounded-lg w-full p-2 px-4 bg-card border outline-0;
+    @apply rounded-lg w-full p-2 bg-card border outline-0;
+  }
+
+  .tiptap p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .tiptap > ul {
+    @apply list-disc pl-6;
+  }
+
+  .tiptap > ol {
+    @apply list-decimal pl-6;
+  }
+
+  .tiptap > blockquote {
+    @apply border-l-[4px] pl-2;
   }
 }
