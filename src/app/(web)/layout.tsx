@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <Link
             className="ml-auto flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-white shadow-xs"
-            href="#"
+            href="/make"
           >
             <FileText className="size-6" />
             Crear prueba
