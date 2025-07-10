@@ -1,1 +1,34 @@
 @import "tailwindcss";
+
+@theme inline {
+  --font-sans: Geist, sans-serif;
+  --font-serif: Open Sans, sans-serif;
+  --font-mono: Geist Mono, monospace;
+  --color-background: #f4f6f7;
+  --color-foreground: #17202a;
+  --color-card: #fff;
+  --color-accent: #eaeded;
+  --color-border: #d5d8dc;
+}
+
+@utility container {
+  margin-inline: auto;
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1124px) {
+    max-width: 1124px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
