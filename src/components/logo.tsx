@@ -8,7 +8,7 @@ export function Logo({
   const fill = variant === 'default' ? 'fill-primary' : 'fill-muted';
   return (
     <svg
-      className={cn('size-8', fill)}
+      className={cn('size-6', fill)}
       viewBox="0 0 169 159"
       xmlns="http://www.w3.org/2000/svg"
     >
