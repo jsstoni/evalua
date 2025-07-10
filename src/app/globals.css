@@ -31,4 +31,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  input {
+    @apply rounded-lg w-full p-2 px-4 bg-card border outline-0;
+  }
 }
