@@ -11,7 +11,7 @@ export default async function MakePage() {
   }
 
   return (
-    <section className="mx-6 mt-6">
+    <section className="h-[calc(100svh-3.5rem-1px)] border-x px-6 pt-12">
       <Create />
     </section>
   );

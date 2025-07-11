@@ -7,8 +7,8 @@ import { Signin } from '@/components/signin';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="container">
-        <nav className="flex items-center justify-between gap-2 p-4 py-4">
+      <header className="border-b">
+        <nav className="container flex h-14 items-center justify-between gap-2 border-x px-6">
           <p className="flex items-center gap-2 font-medium text-xl">
             <Logo />
             Evalua

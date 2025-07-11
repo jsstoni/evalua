@@ -3,13 +3,15 @@ import { Brain, CircleCheckBig, Download, Printer } from 'lucide-react';
 export default function Home() {
   return (
     <>
-      <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 py-10 text-center">
-        <h1 className="font-black text-7xl">
-          Genera Preguntas Inteligentes en Segundos
-        </h1>
+      <div className="border-x">
+        <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 py-10 text-center">
+          <h1 className="font-black text-7xl">
+            Genera Preguntas Inteligentes en Segundos
+          </h1>
+        </div>
       </div>
 
-      <section className="py-8">
+      <section className="border-x px-6 py-8">
         <div className="grid grid-cols-2 gap-8">
           <div className="space-y-4 rounded-lg border bg-card p-4 hover:drop-shadow-sm">
             <div className="flex items-center gap-4">
