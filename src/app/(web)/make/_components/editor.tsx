@@ -172,7 +172,7 @@ const Editor = ({ control: _ }: { control: Control<MakeForm> }) => {
     ],
     editorProps: {
       attributes: {
-        class: 'focus:outline-none',
+        class: 'focus:outline-none min-h-30',
       },
     },
     content: '',
