@@ -31,23 +31,18 @@ import { cn } from '@/lib/utils';
 
 type EditBar = { editor: EditorTiptap | null };
 
-type BottomCommand = {
-  id: string;
-  title?: string;
-  icon: LucideIcon;
-  run: () => void;
-  isActive: () => boolean;
-};
+type BottomCommand =
+  | {
+      id: string;
+      title?: string;
+      icon: LucideIcon;
+      run: () => void;
+      isActive: () => boolean;
+    }
+  | { separator?: boolean; name: string };
 
 function textCommands(editor: EditorTiptap): BottomCommand[] {
   return [
-    {
-      id: 'bold',
-      title: 'Negrita',
-      icon: Bold,
-      run: () => editor.chain().focus().toggleBold().run(),
-      isActive: () => editor.isActive('bold'),
-    },
     {
       id: 'italic',
       title: 'Cursiva',
@@ -56,12 +51,20 @@ function textCommands(editor: EditorTiptap): BottomCommand[] {
       isActive: () => editor.isActive('italic'),
     },
     {
+      id: 'bold',
+      title: 'Negrita',
+      icon: Bold,
+      run: () => editor.chain().focus().toggleBold().run(),
+      isActive: () => editor.isActive('bold'),
+    },
+    {
       id: 'underline',
       title: 'Subrayar',
       icon: Underline,
       run: () => editor.chain().focus().toggleUnderline().run(),
       isActive: () => editor.isActive('underline'),
     },
+    { separator: true, name: 'ibu' },
   ];
 }
 
@@ -85,6 +88,7 @@ function EditorBar({ editor }: EditBar) {
       run: () => editor.chain().focus().redo().run(),
       isActive: () => editor.isActive('redo'),
     },
+    { separator: true, name: '' },
     ...textCommands(editor),
     {
       id: 'left',
@@ -114,6 +118,7 @@ function EditorBar({ editor }: EditBar) {
       run: () => editor.chain().focus().toggleTextAlign('justify').run(),
       isActive: () => editor.isActive({ textAlign: 'justify' }),
     },
+    { separator: true, name: 'lcrj' },
     {
       id: 'blockquote',
       title: 'Cita',
@@ -121,6 +126,7 @@ function EditorBar({ editor }: EditBar) {
       run: () => editor.chain().focus().toggleBlockquote().run(),
       isActive: () => editor.isActive('blockquote'),
     },
+    { separator: true, name: 'b' },
     {
       id: 'bulletList',
       title: 'Lista con viñetas',
@@ -142,18 +148,26 @@ function EditorBar({ editor }: EditBar) {
 
 function Menu({ commands }: { commands: BottomCommand[] }) {
   return (
-    <div className="flex items-center gap-px border-y p-2">
-      {commands.map((command) => (
-        <Button
-          className={cn(command.isActive() && 'bg-accent')}
-          type="button"
-          variant="ghost"
-          key={command.id}
-          onClick={command.run}
-        >
-          <command.icon size={18} />
-        </Button>
-      ))}
+    <div className="flex items-center gap-px border-y p-1">
+      {commands.map((command) => {
+        if ('separator' in command && command.separator) {
+          return <div className="mx-2 h-8 w-px bg-accent" key={command.name} />;
+        }
+        if ('id' in command) {
+          return (
+            <Button
+              className={cn(command.isActive() && 'bg-accent')}
+              type="button"
+              variant="ghost"
+              key={command.id}
+              onClick={command.run}
+            >
+              <command.icon size={18} />
+            </Button>
+          );
+        }
+        return null;
+      })}
     </div>
   );
 }
