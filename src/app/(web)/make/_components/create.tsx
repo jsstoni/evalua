@@ -24,7 +24,7 @@ export function Create() {
       <form onSubmit={onSubmit}>
         <div className="flex items-start gap-8">
           <div className="sticky top-4 flex flex-col gap-1 rounded-lg border bg-card p-1">
-            <AddQuestion append={append} />
+            <AddQuestion appendAction={append} />
           </div>
           <div className="test flex flex-1 flex-col gap-2 border bg-card p-6">
             <div className="flex items-center gap-1 font-bold">
@@ -44,7 +44,7 @@ export function Create() {
 
             <div className="flex flex-col gap-4">
               {fields.map((field, index) => (
-                <Question index={index} key={field.id} remove={remove} />
+                <Question index={index} key={field.id} removeAction={remove} />
               ))}
             </div>
           </div>

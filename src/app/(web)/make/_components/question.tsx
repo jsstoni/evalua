@@ -6,15 +6,15 @@ import type { MakeForm } from '@/lib/schema';
 
 export function Question({
   index,
-  remove,
+  removeAction,
 }: {
   index: number;
-  remove: UseFieldArrayRemove;
+  removeAction: UseFieldArrayRemove;
 }) {
   const { register } = useFormContext<MakeForm>();
 
   const hadleRemove = () => {
-    remove(index);
+    removeAction(index);
   };
 
   return (

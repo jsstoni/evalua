@@ -6,12 +6,12 @@ import { Button } from '@/components/button';
 import type { MakeForm } from '@/lib/schema';
 
 export function AddQuestion({
-  append,
+  appendAction,
 }: {
-  append: UseFieldArrayAppend<MakeForm, 'questions'>;
+  appendAction: UseFieldArrayAppend<MakeForm, 'questions'>;
 }) {
   const addQuestion = () => {
-    append({ ask: '', points: 0, options: [] });
+    appendAction({ ask: '', points: 0, options: [] });
   };
 
   return (
