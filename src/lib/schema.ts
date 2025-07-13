@@ -5,7 +5,7 @@ export const createForm = z.object({
   content: z.string().optional(),
   questions: z.array(
     z.object({
-      //type: z.enum(['multiple-choice', 'true-false', 'essay']),
+      type: z.enum(['multiple-choice', 'true-false', 'essay']),
       ask: z.string().nonempty('completa la pregunta'),
       points: z.number(),
       options: z.array(
@@ -16,3 +16,5 @@ export const createForm = z.object({
 });
 
 export type MakeForm = z.infer<typeof createForm>;
+
+export type QuestionType = MakeForm['questions'][number]['type'];

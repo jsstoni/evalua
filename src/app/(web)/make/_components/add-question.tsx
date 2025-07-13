@@ -1,22 +1,32 @@
 'use client';
 
-import { PlusCircle } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 import type { UseFieldArrayAppend } from 'react-hook-form';
 import { Button } from '@/components/button';
-import type { MakeForm } from '@/lib/schema';
+import type { MakeForm, QuestionType } from '@/lib/schema';
 
 export function AddQuestion({
+  children,
   appendAction,
+  type,
 }: {
+  children?: React.ReactNode;
   appendAction: UseFieldArrayAppend<MakeForm, 'questions'>;
+  type: QuestionType;
 }) {
   const addQuestion = () => {
-    appendAction({ ask: '', points: 0, options: [] });
+    appendAction({ type, ask: '', points: 0, options: [] });
   };
 
   return (
-    <Button type="button" variant="ghost" onClick={addQuestion}>
-      <PlusCircle />
+    <Button
+      className="relative"
+      type="button"
+      variant="ghost"
+      onClick={addQuestion}
+    >
+      {children}
+      <CirclePlus className="absolute right-0 bottom-0" size={14} />
     </Button>
   );
 }
