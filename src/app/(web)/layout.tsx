@@ -13,13 +13,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Logo />
             Evalua
           </p>
-          <Button className="ml-auto" asChild>
-            <Link href="/make">
-              <FileText className="size-4" />
-              Crear prueba
-            </Link>
-          </Button>
-          <Signin />
+          <div className="ml-auto flex items-center gap-2">
+            <Signin />
+            <Button asChild>
+              <Link href="/make">
+                <FileText className="size-4" />
+                Crear prueba
+              </Link>
+            </Button>
+          </div>
         </nav>
       </header>
       <main>{children}</main>
