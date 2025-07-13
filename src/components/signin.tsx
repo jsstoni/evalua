@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import Google from '@/components/google';
 import { authClient } from '@/lib/auth-client';
+import { Button } from './button';
 
 export function Signin() {
   const { data: profile, isPending } = authClient.useSession();
@@ -20,10 +22,11 @@ export function Signin() {
   if (profile) {
     return (
       <div className="flex items-center gap-2">
-        {/** biome-ignore lint/performance/noImgElement: use img */}
-        <img
+        <Image
           className="size-9 rounded-lg"
           src={profile.user.image as string}
+          width={40}
+          height={40}
           alt={profile.user.name}
         />
         <p>
@@ -35,12 +38,8 @@ export function Signin() {
   }
 
   return (
-    <button
-      className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 shadow-xs"
-      type="button"
-      onClick={handleLogin}
-    >
+    <Button type="button" variant="ghost" onClick={handleLogin}>
       <Google className="size-6" /> Ingresar con google
-    </button>
+    </Button>
   );
 }
