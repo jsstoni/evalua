@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Signin />
         </nav>
       </header>
-      <main className="container">{children}</main>
+      <main>{children}</main>
     </>
   );
 }

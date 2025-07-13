@@ -1,79 +1,91 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: Geist, sans-serif;
-  --font-serif: Open Sans, sans-serif;
-  --font-mono: Geist Mono, monospace;
-  --color-background: #f4f6f7;
-  --color-foreground: #17202a;
-  --color-card: #fff;
-  --color-accent: #eaeded;
-  --color-border: #d5d8dc;
+    --font-sans: Geist, sans-serif;
+    --font-serif: Open Sans, sans-serif;
+    --font-mono: Geist Mono, monospace;
+    --color-background: #f4f6f7;
+    --color-foreground: #17202a;
+    --color-card: #fff;
+    --color-accent: #eaeded;
+    --color-border: #d5d8dc;
 }
 
 @utility container {
-  margin-inline: auto;
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1124px) {
-    max-width: 1124px;
-  }
+    margin-inline: auto;
+    @media (width >= 768px) {
+        max-width: 768px;
+    }
+    @media (width >= 1024px) {
+        max-width: 1024px;
+    }
+    @media (width >= 1124px) {
+        max-width: 1124px;
+    }
 }
 
 .test {
-  @apply relative;
+    @apply relative;
 }
 
 .test:before,
 .test:after {
-  @apply absolute -z-10 size-full border border-border bg-white content-[''];
+    @apply absolute -z-10 size-full border border-border bg-white content-[''];
 }
 
 .test:before {
-  left: -5px;
-  top: 2px;
-  transform: rotate(-1.5deg);
+    left: -5px;
+    top: 2px;
+    transform: rotate(-1.5deg);
 }
 
 .test:after {
-  right: -3px;
-  top: 0px;
-  transform: rotate(2.4deg);
+    right: -3px;
+    top: 0px;
+    transform: rotate(2.4deg);
+}
+
+.border-plus {
+    @apply relative;
+}
+
+.border-plus::before {
+    @apply absolute -top-1.5 -left-1.5 z-40 flex size-3 -rotate-45 items-center justify-center border border-border bg-background text-2xl font-thin text-zinc-400 content-[''];
+}
+
+.border-plus::after {
+    @apply absolute -top-1.5 -right-1.5 z-40 flex size-3 -rotate-45 items-center justify-center border border-border bg-background text-2xl font-thin text-zinc-400 content-[''];
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 
-  input {
-    @apply rounded-lg w-full p-2 bg-card border outline-0;
-  }
+    input {
+        @apply rounded-lg w-full p-2 bg-card border outline-0;
+    }
 
-  .tiptap p.is-editor-empty:first-child::before {
-    color: #adb5bd;
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
-  }
+    .tiptap p.is-editor-empty:first-child::before {
+        color: #adb5bd;
+        content: attr(data-placeholder);
+        float: left;
+        height: 0;
+        pointer-events: none;
+    }
 
-  .tiptap > ul {
-    @apply list-disc pl-6;
-  }
+    .tiptap > ul {
+        @apply list-disc pl-6;
+    }
 
-  .tiptap > ol {
-    @apply list-decimal pl-6;
-  }
+    .tiptap > ol {
+        @apply list-decimal pl-6;
+    }
 
-  .tiptap > blockquote {
-    @apply border-l-[4px] pl-2;
-  }
+    .tiptap > blockquote {
+        @apply border-l-[4px] pl-2;
+    }
 }
