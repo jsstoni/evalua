@@ -18,12 +18,11 @@ export function Answers({ index }: { index: number }) {
         {fields.map((field, indexAnswer) => (
           <div className="relative flex items-center" key={field.id}>
             <input
-              className="rounded-none border-0 border-b px-0"
               placeholder={`Opción ${indexAnswer + 1}`}
               {...register(`questions.${index}.options.${indexAnswer}.answer`)}
             />
             <X
-              className="-translate-y-1/2 absolute top-1/2 right-2 cursor-pointer"
+              className="-translate-y-1/2 absolute top-1/2 right-2 size-4 cursor-pointer stroke-gray-500"
               onClick={() => remove(indexAnswer)}
             />
           </div>

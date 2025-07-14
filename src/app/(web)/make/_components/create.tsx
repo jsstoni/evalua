@@ -14,22 +14,21 @@ import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
 import { createForm, type MakeForm, type QuestionType } from '@/lib/schema';
 
-type QuestionOption = {
-  type: QuestionType;
-  icon: LucideIcon;
-};
-
-export const question: Record<QuestionType, string> = {
+export const questionTitle: Record<QuestionType, string> = {
   'multiple-choice': 'Multiples opciones',
   'true-false': 'Verdadore o falso',
   essay: 'Ensayo',
 };
 
-const questionOption: QuestionOption[] = [
-  { type: 'multiple-choice', icon: ListChecks },
-  { type: 'true-false', icon: CheckCheck },
-  { type: 'essay', icon: PencilLine },
-];
+export const questionIcons: Record<QuestionType, LucideIcon> = {
+  'multiple-choice': ListChecks,
+  'true-false': CheckCheck,
+  essay: PencilLine,
+};
+
+const questionOptions = (
+  Object.entries(questionIcons) as [QuestionType, LucideIcon][]
+).map(([type, icon]) => ({ type, icon }));
 
 export function Create() {
   const form = useForm<MakeForm>({ resolver: zodResolver(createForm) });
@@ -49,7 +48,7 @@ export function Create() {
           <div className="flex items-center gap-1 font-bold">
             <FileText size={32} strokeWidth={0.5} />
             <input
-              className="border-0 bg-transparent"
+              className="border-0 bg-transparent shadow-none"
               placeholder="Objetivo de la prueba"
               id="title"
               {...form.register('title', {
@@ -64,7 +63,7 @@ export function Create() {
           <Questions fields={fields} removeAction={remove} />
 
           <div className="sticky bottom-4 mx-auto mt-4 flex gap-1.5 self-start rounded-lg border bg-card p-1.5 shadow-lg">
-            {questionOption.map((option) => (
+            {questionOptions.map((option) => (
               <AddQuestion
                 type={option.type}
                 appendAction={append}

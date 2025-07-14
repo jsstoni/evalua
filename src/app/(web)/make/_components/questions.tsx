@@ -7,8 +7,9 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { Answers } from '@/app/(web)/make/_components/answers';
-import { question } from '@/app/(web)/make/_components/create';
+import { Button } from '@/components/button';
 import type { MakeForm } from '@/lib/schema';
+import { questionIcons } from './create';
 
 export function Questions({
   fields,
@@ -24,29 +25,46 @@ export function Questions({
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      {fields.map((field, index) => (
-        <div className="flex flex-col gap-2" key={field.id}>
-          <div className="flex items-center gap-2">
+    <div className="mt-4 flex flex-col gap-4">
+      {fields.map((field, index) => {
+        const Icon = questionIcons[field.type];
+        return (
+          <div
+            className="flex flex-col gap-2 rounded-lg border p-4"
+            key={field.id}
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-md border bg-accent">
+                <Icon />
+              </div>
+              <p>Pregunta {index + 1}.</p>
+
+              <span className="ml-auto text-sm">Puntos:</span>
+              <input
+                className="w-20"
+                min="0"
+                type="number"
+                placeholder="0"
+                {...register(`questions.${index}.points`, {
+                  valueAsNumber: true,
+                })}
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => removeAction(index)}
+              >
+                <Trash className="stroke-gray-500" />
+              </Button>
+            </div>
             <input
-              className="rounded-none border-0 border-b px-0"
               placeholder={`Pregunta ${index + 1}`}
               {...register(`questions.${index}.ask`)}
             />
-            <input
-              className="w-20 rounded-none border-0 border-b px-0"
-              type="number"
-              placeholder="pts: 0"
-              {...register(`questions.${index}.points`, {
-                valueAsNumber: true,
-              })}
-            />
-            <Trash onClick={() => removeAction(index)} />
+            {field.type === 'multiple-choice' && <Answers index={index} />}
           </div>
-          <small>{question[field.type]}</small>
-          {field.type === 'multiple-choice' && <Answers index={index} />}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
