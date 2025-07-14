@@ -2,7 +2,7 @@
 
 import { Plus, X } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import type { MakeForm } from '@/lib/schema';
 
 export function Answers({ index }: { index: number }) {

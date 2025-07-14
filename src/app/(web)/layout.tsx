@@ -1,8 +1,8 @@
 import { FileText } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/button';
 import { Logo } from '@/components/logo';
 import { Signin } from '@/components/signin';
+import { Button } from '@/components/ui/button';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

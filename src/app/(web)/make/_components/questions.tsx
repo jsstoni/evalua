@@ -7,7 +7,7 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { Answers } from '@/app/(web)/make/_components/answers';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import type { MakeForm } from '@/lib/schema';
 import { questionIcons } from './create';
 

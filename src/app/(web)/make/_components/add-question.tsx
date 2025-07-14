@@ -2,7 +2,7 @@
 
 import { CirclePlus } from 'lucide-react';
 import type { UseFieldArrayAppend } from 'react-hook-form';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import type { MakeForm, QuestionType } from '@/lib/schema';
 
 export function AddQuestion({
@@ -19,7 +19,7 @@ export function AddQuestion({
     if (type === 'multiple-choice') {
       options.push({ answer: '' });
     }
-    appendAction({ type, ask: '', points: undefined, options });
+    appendAction({ type, ask: '', points: 1, options });
   };
 
   return (

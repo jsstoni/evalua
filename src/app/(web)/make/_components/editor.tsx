@@ -25,7 +25,7 @@ import {
   Undo,
 } from 'lucide-react';
 import type { Control } from 'react-hook-form';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import type { MakeForm } from '@/lib/schema';
 import { cn } from '@/lib/utils';
 

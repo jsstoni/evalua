@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Google from '@/components/google';
+import { Button } from '@/components/ui/button';
 import { authClient } from '@/lib/auth-client';
-import { Button } from './button';
 
 export function Signin() {
   const { data: profile, isPending } = authClient.useSession();
