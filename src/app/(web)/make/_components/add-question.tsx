@@ -15,7 +15,11 @@ export function AddQuestion({
   type: QuestionType;
 }) {
   const addQuestion = () => {
-    appendAction({ type, ask: '', points: 0, options: [] });
+    const options: Record<'answer', string>[] = [];
+    if (type === 'multiple-choice') {
+      options.push({ answer: '' });
+    }
+    appendAction({ type, ask: '', points: undefined, options });
   };
 
   return (
@@ -23,10 +27,11 @@ export function AddQuestion({
       className="relative"
       type="button"
       variant="ghost"
+      size="icon"
       onClick={addQuestion}
     >
       {children}
-      <CirclePlus className="absolute right-0 bottom-0" size={14} />
+      <CirclePlus className="absolute right-0 bottom-0 size-4" />
     </Button>
   );
 }
