@@ -8,6 +8,7 @@ import {
 } from 'react-hook-form';
 import { Answers } from '@/app/(web)/make/_components/answers';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import type { MakeForm } from '@/lib/schema';
 import { questionIcons } from './create';
 
@@ -40,7 +41,7 @@ export function Questions({
               <p>Pregunta {index + 1}.</p>
 
               <span className="ml-auto text-sm">Puntos:</span>
-              <input
+              <Input
                 className="w-20"
                 min="0"
                 type="number"
@@ -57,7 +58,7 @@ export function Questions({
                 <Trash className="stroke-gray-500" />
               </Button>
             </div>
-            <input
+            <Input
               placeholder={`Pregunta ${index + 1}`}
               {...register(`questions.${index}.ask`)}
             />

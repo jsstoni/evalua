@@ -65,10 +65,6 @@
         @apply bg-background text-foreground;
     }
 
-    input {
-        @apply rounded-lg w-full h-9 px-3 py-1 text-base shadow-xs bg-card border outline-0;
-    }
-
     .tiptap p.is-editor-empty:first-child::before {
         color: #adb5bd;
         content: attr(data-placeholder);

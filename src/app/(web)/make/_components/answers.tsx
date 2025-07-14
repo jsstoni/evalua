@@ -3,6 +3,7 @@
 import { Plus, X } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import type { MakeForm } from '@/lib/schema';
 
 export function Answers({ index }: { index: number }) {
@@ -17,7 +18,7 @@ export function Answers({ index }: { index: number }) {
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map((field, indexAnswer) => (
           <div className="relative flex items-center" key={field.id}>
-            <input
+            <Input
               placeholder={`Opción ${indexAnswer + 1}`}
               {...register(`questions.${index}.options.${indexAnswer}.answer`)}
             />

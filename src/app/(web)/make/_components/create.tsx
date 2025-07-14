@@ -12,6 +12,7 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { AddQuestion } from '@/app/(web)/make/_components/add-question';
 import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
+import { Input } from '@/components/ui/input';
 import { createForm, type MakeForm, type QuestionType } from '@/lib/schema';
 
 export const questionTitle: Record<QuestionType, string> = {
@@ -47,7 +48,7 @@ export function Create() {
         <div className="test relative flex flex-1 flex-col gap-2 border bg-card p-6">
           <div className="flex items-center gap-1 font-bold">
             <FileText size={32} strokeWidth={0.5} />
-            <input
+            <Input
               className="border-0 bg-transparent shadow-none"
               placeholder="Objetivo de la prueba"
               id="title"
