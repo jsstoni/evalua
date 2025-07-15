@@ -7,6 +7,7 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { Answers } from '@/app/(web)/make/_components/answers';
+import { Field } from '@/components/form/field';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { MakeForm } from '@/lib/schema';
@@ -19,7 +20,7 @@ export function Questions({
   fields: FieldArrayWithId<MakeForm, 'questions'>[];
   removeAction: UseFieldArrayRemove;
 }) {
-  const { register } = useFormContext<MakeForm>();
+  const { control, register, formState } = useFormContext<MakeForm>();
 
   if (fields.length <= 0) {
     return <p className="text-center font-medium text-2xl">No hay preguntas</p>;
@@ -43,9 +44,9 @@ export function Questions({
               <span className="ml-auto text-sm">Puntos:</span>
               <Input
                 className="w-20"
-                min="0"
+                min="1"
                 type="number"
-                placeholder="0"
+                placeholder="1"
                 {...register(`questions.${index}.points`, {
                   valueAsNumber: true,
                 })}
@@ -58,10 +59,21 @@ export function Questions({
                 <Trash className="stroke-gray-500" />
               </Button>
             </div>
-            <Input
-              placeholder={`Pregunta ${index + 1}`}
-              {...register(`questions.${index}.ask`)}
+
+            <Field
+              control={control}
+              name={`questions.${index}.ask`}
+              render={(field) => (
+                <Input placeholder={`Pregunta ${index + 1}`} {...field} />
+              )}
             />
+
+            {formState.errors.questions?.[index]?.options && (
+              <p className="text-destructive text-sm">
+                {formState.errors.questions[index]?.options?.message}
+              </p>
+            )}
+
             {field.type === 'multiple-choice' && <Answers index={index} />}
           </div>
         );

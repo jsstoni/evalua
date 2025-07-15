@@ -2,12 +2,14 @@
 
 import { Plus, X } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { Field } from '@/components/form/field';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { MakeForm } from '@/lib/schema';
 
 export function Answers({ index }: { index: number }) {
-  const { control, register } = useFormContext<MakeForm>();
+  const { control } = useFormContext<MakeForm>();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: `questions.${index}.options` as const,
@@ -15,18 +17,23 @@ export function Answers({ index }: { index: number }) {
 
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid items-start gap-4 md:grid-cols-2">
         {fields.map((field, indexAnswer) => (
-          <div className="relative flex items-center" key={field.id}>
-            <Input
-              placeholder={`Opción ${indexAnswer + 1}`}
-              {...register(`questions.${index}.options.${indexAnswer}.answer`)}
-            />
-            <X
-              className="-translate-y-1/2 absolute top-1/2 right-2 size-4 cursor-pointer stroke-gray-500"
-              onClick={() => remove(indexAnswer)}
-            />
-          </div>
+          <Field
+            className="flex-1"
+            control={control}
+            name={`questions.${index}.options.${indexAnswer}.answer`}
+            key={field.id}
+            render={(field) => (
+              <div className="relative flex items-center [&[aria-invalid='true']_input]:border-destructive">
+                <Input placeholder={`Opción ${indexAnswer + 1}`} {...field} />
+                <X
+                  className="-translate-y-1/2 absolute top-1/2 right-2 size-4 cursor-pointer stroke-gray-500"
+                  onClick={() => remove(indexAnswer)}
+                />
+              </div>
+            )}
+          />
         ))}
       </div>
       <Button

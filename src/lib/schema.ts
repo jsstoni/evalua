@@ -6,10 +6,10 @@ export const createForm = z.object({
   questions: z.array(
     z.object({
       type: z.enum(['multiple-choice', 'true-false', 'essay']),
-      ask: z.string().nonempty('completa la pregunta'),
+      ask: z.string().nonempty('Completa la pregunta'),
       points: z.number(),
       options: z.array(
-        z.object({ answer: z.string().nonempty('Completa la repuesta') }),
+        z.object({ answer: z.string().nonempty('Completa la respuesta') }),
       ),
     }),
   ),

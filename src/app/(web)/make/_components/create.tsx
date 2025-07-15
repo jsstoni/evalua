@@ -9,11 +9,13 @@ import {
   PencilLine,
   PlusCircle,
 } from 'lucide-react';
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { AddQuestion } from '@/app/(web)/make/_components/add-question';
 import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
+import { Field } from '@/components/form/field';
 import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
   Popover,
@@ -44,7 +46,15 @@ const questionOptions = (
 ).map(([type, icon]) => ({ type, icon }));
 
 export function Create() {
-  const form = useForm<MakeForm>({ resolver: zodResolver(createForm) });
+  const form = useForm<MakeForm>({
+    resolver: zodResolver(createForm),
+    defaultValues: {
+      title: '',
+      content: '',
+      questions: [],
+    },
+  });
+
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: 'questions',
@@ -55,19 +65,23 @@ export function Create() {
   });
 
   return (
-    <FormProvider {...form}>
+    <Form {...form}>
       <form onSubmit={onSubmit}>
         <div className="test relative flex flex-1 flex-col gap-2 border bg-card p-6">
-          <div className="flex items-center gap-1 font-bold">
+          <div className="flex items-center gap-2">
             <FileText size={32} strokeWidth={0.5} />
-            <Input
-              className="border-0 bg-transparent shadow-none"
-              placeholder="Objetivo de la prueba"
-              id="title"
-              {...form.register('title', {
-                required: true,
-                pattern: /^[A-Za-z]+$/i,
-              })}
+            <Field
+              className="flex-1"
+              control={form.control}
+              name="title"
+              render={(field) => (
+                <Input
+                  className="border-0 bg-transparent px-0 shadow-none"
+                  placeholder="Objetivo de la prueba"
+                  id="title"
+                  {...field}
+                />
+              )}
             />
           </div>
 
@@ -75,7 +89,7 @@ export function Create() {
 
           <Questions fields={fields} removeAction={remove} />
 
-          <div className="sticky bottom-4 mx-auto mt-4 flex gap-1.5 self-start rounded-lg border bg-card p-1.5 shadow-lg">
+          <div className="sticky bottom-4 mx-auto mt-4 flex gap-px self-start rounded-lg border bg-card p-1.5 shadow-lg">
             <Popover>
               <Tooltip>
                 <PopoverTrigger asChild>
@@ -101,9 +115,10 @@ export function Create() {
                 ))}
               </PopoverContent>
             </Popover>
+            <button type="submit">Enviar</button>
           </div>
         </div>
       </form>
-    </FormProvider>
+    </Form>
   );
 }
