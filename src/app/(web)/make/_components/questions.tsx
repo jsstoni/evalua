@@ -20,7 +20,7 @@ export function Questions({
   fields: FieldArrayWithId<MakeForm, 'questions'>[];
   removeAction: UseFieldArrayRemove;
 }) {
-  const { control, register, formState } = useFormContext<MakeForm>();
+  const { control, register } = useFormContext<MakeForm>();
 
   if (fields.length <= 0) {
     return <p className="text-center font-medium text-2xl">No hay preguntas</p>;
@@ -67,12 +67,6 @@ export function Questions({
                 <Input placeholder={`Pregunta ${index + 1}`} {...field} />
               )}
             />
-
-            {formState.errors.questions?.[index]?.options && (
-              <p className="text-destructive text-sm">
-                {formState.errors.questions[index]?.options?.message}
-              </p>
-            )}
 
             {field.type === 'multiple-choice' && <Answers index={index} />}
           </div>
