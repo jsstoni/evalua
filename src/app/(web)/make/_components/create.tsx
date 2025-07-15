@@ -7,12 +7,24 @@ import {
   ListChecks,
   type LucideIcon,
   PencilLine,
+  PlusCircle,
 } from 'lucide-react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { AddQuestion } from '@/app/(web)/make/_components/add-question';
 import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { createForm, type MakeForm, type QuestionType } from '@/lib/schema';
 
 export const questionTitle: Record<QuestionType, string> = {
@@ -64,15 +76,31 @@ export function Create() {
           <Questions fields={fields} removeAction={remove} />
 
           <div className="sticky bottom-4 mx-auto mt-4 flex gap-1.5 self-start rounded-lg border bg-card p-1.5 shadow-lg">
-            {questionOptions.map((option) => (
-              <AddQuestion
-                type={option.type}
-                appendAction={append}
-                key={option.type}
-              >
-                <option.icon strokeWidth={1.2} />
-              </AddQuestion>
-            ))}
+            <Popover>
+              <Tooltip>
+                <PopoverTrigger asChild>
+                  <TooltipTrigger asChild>
+                    <Button type="button" variant="ghost">
+                      <PlusCircle className="size-7" strokeWidth={1} />
+                    </Button>
+                  </TooltipTrigger>
+                </PopoverTrigger>
+
+                <TooltipContent>Añadir pregunta</TooltipContent>
+              </Tooltip>
+              <PopoverContent className="flex w-auto flex-col p-2" side="top">
+                {questionOptions.map((option) => (
+                  <AddQuestion
+                    type={option.type}
+                    appendAction={append}
+                    key={option.type}
+                  >
+                    <option.icon />
+                    {questionTitle[option.type]}
+                  </AddQuestion>
+                ))}
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </form>

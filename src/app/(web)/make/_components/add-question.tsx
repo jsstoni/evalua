@@ -1,6 +1,5 @@
 'use client';
 
-import { CirclePlus } from 'lucide-react';
 import type { UseFieldArrayAppend } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import type { MakeForm, QuestionType } from '@/lib/schema';
@@ -24,14 +23,13 @@ export function AddQuestion({
 
   return (
     <Button
-      className="relative"
+      className="w-full justify-start"
       type="button"
       variant="ghost"
-      size="icon"
+      size="sm"
       onClick={addQuestion}
     >
       {children}
-      <CirclePlus className="absolute right-0 bottom-0 size-4" />
     </Button>
   );
 }
