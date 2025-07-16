@@ -30,6 +30,11 @@ const Editor = dynamic(() => import('@/app/(web)/make/_components/editor'), {
   ssr: false,
 });
 
+const PdfUpload = dynamic(
+  () => import('@/app/(web)/make/_components/pdf-upload'),
+  { ssr: false },
+);
+
 export const questionTitle: Record<QuestionType, string> = {
   'multiple-choice': 'Multiples opciones',
   'true-false': 'Verdadore o falso',
@@ -61,6 +66,11 @@ export function Create() {
     name: 'questions',
   });
 
+  const handleContent = (v: string) => {
+    console.log(v);
+    form.setValue('content', v);
+  };
+
   const onSubmit = form.handleSubmit((data) => {
     console.log(data);
   });
@@ -86,7 +96,7 @@ export function Create() {
             />
           </div>
 
-          <Editor control={form.control} />
+          <Editor />
 
           <Questions fields={fields} removeAction={remove} />
 
@@ -112,6 +122,8 @@ export function Create() {
                 ))}
               </PopoverContent>
             </Popover>
+
+            <PdfUpload saveAction={handleContent} />
 
             <HoverInfo title="Guardar">
               <Button type="submit" variant="ghost">

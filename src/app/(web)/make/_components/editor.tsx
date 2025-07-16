@@ -24,7 +24,8 @@ import {
   Underline,
   Undo,
 } from 'lucide-react';
-import type { Control } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { HoverInfo } from '@/components/hover-info';
 import { Button } from '@/components/ui/button';
 import type { MakeForm } from '@/lib/schema';
@@ -174,7 +175,9 @@ function Menu({ commands }: { commands: BottomCommand[] }) {
   );
 }
 
-const Editor = ({ control: _ }: { control: Control<MakeForm> }) => {
+export const Editor = () => {
+  const { setValue, watch } = useFormContext<MakeForm>();
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -192,7 +195,20 @@ const Editor = ({ control: _ }: { control: Control<MakeForm> }) => {
       },
     },
     content: '',
+    onUpdate: ({ editor }) => {
+      setValue('content', editor.getHTML());
+    },
   });
+
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'content' && editor && value.content !== editor.getHTML()) {
+        editor.commands.setContent(value.content || '');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [editor, watch]);
 
   return (
     <>
