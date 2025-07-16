@@ -25,6 +25,7 @@ import {
   Undo,
 } from 'lucide-react';
 import type { Control } from 'react-hook-form';
+import { HoverInfo } from '@/components/hover-info';
 import { Button } from '@/components/ui/button';
 import type { MakeForm } from '@/lib/schema';
 import { cn } from '@/lib/utils';
@@ -151,19 +152,20 @@ function Menu({ commands }: { commands: BottomCommand[] }) {
     <div className="flex items-center gap-px border-y p-1">
       {commands.map((command) => {
         if ('separator' in command && command.separator) {
-          return <div className="mx-2 h-8 w-px bg-accent" key={command.name} />;
+          return <div className="mx-2 h-6 w-px bg-input" key={command.name} />;
         }
         if ('id' in command) {
           return (
-            <Button
-              className={cn(command.isActive() && 'bg-accent')}
-              type="button"
-              variant="ghost"
-              key={command.id}
-              onClick={command.run}
-            >
-              <command.icon size={18} />
-            </Button>
+            <HoverInfo title={command.title || ''} key={command.id}>
+              <Button
+                className={cn(command.isActive() && 'bg-muted')}
+                type="button"
+                variant="ghost"
+                onClick={command.run}
+              >
+                <command.icon size={18} />
+              </Button>
+            </HoverInfo>
           );
         }
         return null;
