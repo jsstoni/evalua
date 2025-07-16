@@ -10,9 +10,9 @@ import {
   PlusCircle,
   Save,
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { AddQuestion } from '@/app/(web)/make/_components/add-question';
-import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
 import { Field } from '@/components/form/field';
 import { HoverInfo } from '@/components/hover-info';
@@ -25,6 +25,10 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { createForm, type MakeForm, type QuestionType } from '@/lib/schema';
+
+const Editor = dynamic(() => import('@/app/(web)/make/_components/editor'), {
+  ssr: false,
+});
 
 export const questionTitle: Record<QuestionType, string> = {
   'multiple-choice': 'Multiples opciones',
