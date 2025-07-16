@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback } from 'react';
 import type { UseFieldArrayAppend } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import type { MakeForm, QuestionType } from '@/lib/schema';
@@ -13,13 +14,13 @@ export function AddQuestion({
   appendAction: UseFieldArrayAppend<MakeForm, 'questions'>;
   type: QuestionType;
 }) {
-  const addQuestion = () => {
+  const addQuestion = useCallback(() => {
     const options: Record<'answer', string>[] = [];
     if (type === 'multiple-choice') {
       options.push({ answer: '' });
     }
     appendAction({ type, ask: '', points: 1, options });
-  };
+  }, [appendAction, type]);
 
   return (
     <Button
