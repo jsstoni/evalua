@@ -8,12 +8,14 @@ import {
   type LucideIcon,
   PencilLine,
   PlusCircle,
+  Save,
 } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { AddQuestion } from '@/app/(web)/make/_components/add-question';
 import Editor from '@/app/(web)/make/_components/editor';
 import { Questions } from '@/app/(web)/make/_components/questions';
 import { Field } from '@/components/form/field';
+import { HoverInfo } from '@/components/hover-info';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -22,11 +24,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { createForm, type MakeForm, type QuestionType } from '@/lib/schema';
 
 export const questionTitle: Record<QuestionType, string> = {
@@ -91,17 +88,13 @@ export function Create() {
 
           <div className="sticky bottom-4 mx-auto mt-4 flex gap-px self-start rounded-lg border bg-card p-1.5 shadow-lg">
             <Popover>
-              <Tooltip>
+              <HoverInfo title="Añadir pregunta">
                 <PopoverTrigger asChild>
-                  <TooltipTrigger asChild>
-                    <Button type="button" variant="ghost">
-                      <PlusCircle className="size-7" strokeWidth={1} />
-                    </Button>
-                  </TooltipTrigger>
+                  <Button type="button" variant="ghost">
+                    <PlusCircle className="size-7" strokeWidth={1} />
+                  </Button>
                 </PopoverTrigger>
-
-                <TooltipContent>Añadir pregunta</TooltipContent>
-              </Tooltip>
+              </HoverInfo>
               <PopoverContent className="flex w-auto flex-col p-2" side="top">
                 {questionOptions.map((option) => (
                   <AddQuestion
@@ -115,7 +108,12 @@ export function Create() {
                 ))}
               </PopoverContent>
             </Popover>
-            <button type="submit">Enviar</button>
+
+            <HoverInfo title="Guardar">
+              <Button type="submit" variant="ghost">
+                <Save className="size-7" strokeWidth={1} />
+              </Button>
+            </HoverInfo>
           </div>
         </div>
       </form>

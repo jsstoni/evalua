@@ -23,7 +23,11 @@ export function Questions({
   const { control, register } = useFormContext<MakeForm>();
 
   if (fields.length <= 0) {
-    return <p className="text-center font-medium text-2xl">No hay preguntas</p>;
+    return (
+      <p className="text-center font-medium text-2xl text-muted-foreground">
+        No hay preguntas
+      </p>
+    );
   }
 
   return (
